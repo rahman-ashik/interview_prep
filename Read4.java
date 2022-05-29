@@ -25,6 +25,9 @@ public class Read4 {
                 }
                 return i;
     }
+    private int read4(char[] buf42) {
+        return 0;
+    }
     // resetting the internal buffer
     char[] buf4 = new char[4];
     int i4 = 0, n4 = 0;
