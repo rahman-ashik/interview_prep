@@ -4,7 +4,7 @@ public class Revise_Binary_Tree {
     public void printTest( TreeNode root) {
         if(root==null)
             return;
-        System.out.println(root.val);
+        System.out.print(root.val + " ");
         printTest(root.left);
         printTest(root.right);
     }
@@ -103,6 +103,44 @@ public class Revise_Binary_Tree {
         return;
       }
 
+      public void printBFS(TreeNode root) {
+        if (root == null) return;
+        Set < TreeNode > visited = new HashSet < > ();
+        Queue < TreeNode > q = new LinkedList < > ();
+        q.offer(root);
+
+        while (!q.isEmpty()) {
+          TreeNode node = q.poll();
+          System.out.print(node.val + " ");
+          visited.add(node);
+          if (node.left != null && !visited.contains(node.left)) {
+            q.offer(node.left);
+          }
+          if (node.right != null && !visited.contains(node.right)) {
+            q.offer(node.right);
+          }
+        }
+        System.err.println();
+      }
+      
+      public void printDFS (TreeNode root) {
+        if (root == null) return;
+        Set < TreeNode > visited = new HashSet < > ();
+        Stack < TreeNode > s = new Stack < > ();
+        s.push(root);
+        while (!s.isEmpty()) {
+          TreeNode node = s.pop();
+          System.out.print(node.val + " ");
+          visited.add(node);
+          if (node.right != null && !visited.contains(node.right)) {
+            s.push(node.right);
+          }
+          if (node.left != null && !visited.contains(node.left)) {
+            s.push(node.left);
+          }
+        }
+        System.err.println("\n");
+      }
     
 
 
@@ -129,5 +167,10 @@ public class Revise_Binary_Tree {
         revise_Binary_Tree.printLevelOrder(root);
         System.err.println("\n============ verticalOrder ===============");
         revise_Binary_Tree.verticalOrder(root);
+        System.err.println("\n============ printBFS ===============");
+        revise_Binary_Tree.printBFS(root);
+        System.err.println("\n============ printDFS ===============");
+        revise_Binary_Tree.printDFS(root);
     }
+
 }
