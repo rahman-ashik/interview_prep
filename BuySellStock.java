@@ -24,7 +24,6 @@ public class BuySellStock {
      // kadane's algorithm
      public int maxProfit2(int[] prices) {
 		//simple base case
-		
         if(prices.length == 1) return 0;
         
 		int currentLowest = Integer.MAX_VALUE;
