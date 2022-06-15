@@ -2,7 +2,8 @@ import java.util.*;
 
 public class FlipEquivalentBinaryTrees {
     public boolean flipEquiv(TreeNode root1, TreeNode root2) {
-        Stack<TreeNode> stk1 = new Stack<>(), stk2 = new Stack<>();
+        Stack<TreeNode> stk1 = new Stack<>(), 
+                        stk2 = new Stack<>();
         stk1.push(root1);
         stk2.push(root2);
         while (!stk1.isEmpty() && !stk2.isEmpty()) {

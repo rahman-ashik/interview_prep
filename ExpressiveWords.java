@@ -14,12 +14,14 @@ public class ExpressiveWords {
         //two pointers
         int p1 = 0, p2 = 0, n1 = s.length(), n2 = w.length();
         while(p1<n1 && p2<n2) {
-            if(s.charAt(p1)!=w.charAt(p2))
+            if( s.charAt(p1) != w.charAt(p2) )
                 return false;
             
             int s_count = countRepeatedLetters(s,p1);
             int w_count = countRepeatedLetters(w,p2);
-            if ((s_count<3 && s_count!=w_count)|| (s_count>=3 && s_count<w_count)) return false;
+            if (    (s_count<3 && s_count!=w_count) 
+                ||  (s_count>=3 && s_count<w_count) ) 
+                    return false;
             p1+= s_count; 
             p2+= w_count;
         }

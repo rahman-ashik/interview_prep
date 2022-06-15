@@ -21,7 +21,10 @@ public class WordLadder {
                         String next = new String(current);
                         // WHEN NEXT WORD IS IN THE SET
                         if (set.contains(next)) {
-                            if (next.equals(endWord)) return count + 1;
+                            System.err.println("Found in the Set: " + next);
+                            if (next.equals(endWord)) {
+                                return count + 1;
+                            }
                             queue.add(next);
                             set.remove(next);
                         } else {

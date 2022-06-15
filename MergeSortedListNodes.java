@@ -104,7 +104,7 @@ public class MergeSortedListNodes {
     // Space: O(\log{k}) if we use recursion (depth of the recursion tree).
     public ListNode mergeDivideAndConquer(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
-        return null;
+            return null;
         }
         return divideAndConquer(lists, 0, lists.length - 1);
     }

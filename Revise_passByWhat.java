@@ -15,6 +15,17 @@ public class Revise_passByWhat {
         sb.append("xyz");
     }
 
+    private static void tryChanging(Character c) {
+        c = 'z';
+    }
+
+    private static void tryChanging(char c) {
+        c = 'z';
+    }
+
+
+
+
     public static void main(String[] args) {
 
         String s = "abcd";
@@ -32,6 +43,14 @@ public class Revise_passByWhat {
         StringBuilder sb = new StringBuilder("abcd");
         tryChanging(sb);
         System.out.println(sb);
+
+        Character c = 'a';
+        tryChanging(c);
+        System.out.println(c);
+
+        char c2 = 'a';
+        tryChanging(c2);
+        System.out.println(c2);
 
     }
 

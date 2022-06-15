@@ -5,9 +5,7 @@ public class MeetingRooms {
     public int minMeetingRooms(int[][] intervals) {
         
         // Check for the base case. If there are no intervals, return 0
-        if (intervals.length == 0) {
-          return 0;
-        }
+        if (intervals.length == 0) { return 0;  }
     
         // Min heap
         PriorityQueue<Integer> allocator = new PriorityQueue<Integer>(

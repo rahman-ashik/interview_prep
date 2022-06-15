@@ -26,20 +26,20 @@ public class CoinChange {
 
         dp[0] = 0; // 0 coins to make up amount 0
 
-        System.err.print("         Amounts    " );
-        for (int i=0 ; i<=amount ; i++) {  System.err.print(i + "  ");}
+        // System.err.print("         Amounts    " );
+        // for (int i=0 ; i<=amount ; i++) {  System.err.print(i + "  ");}
 
-        System.err.println();
+        // System.err.println();
 
 
-        System.err.println("before loops       " + Arrays.toString(dp));
+       // System.err.println("before loops       " + Arrays.toString(dp));
         for (int coin : coins) {
             for (int i = coin; i <= amount; i++) {
                 int currentCoinCount = dp[i - coin] + 1; // currentCoinCount is the min number of coins to make up amount i - coin; then + 1
                 dp [i] = Math.min( dp[i], currentCoinCount );
-                System.err.println("coin: " + coin + "  i: " + i + "  dp[i - coin]: " + dp[i - coin]+ "  dp[i]: " + dp[i]);
+                // System.err.println("coin: " + coin + "  i: " + i + "  dp[i - coin]: " + dp[i - coin]+ "  dp[i]: " + dp[i]);
             }
-            System.err.println("After coin " + coin + " dp is " + Arrays.toString(dp));
+            // System.err.println("After coin " + coin + " dp is " + Arrays.toString(dp));
         }
 
         return dp[amount] > amount ? -1 : dp[amount];
@@ -79,11 +79,53 @@ public class CoinChange {
     }
 
 
+    // variation : Use only one coin at a time 
+    public boolean canChange(int[] coins, int amount) {
+        if (amount == 0) return true;
+        if (coins.length == 0) return false;
+        // Map <Integer, Boolean> map = new HashMap<>();
+
+        for (int coin : coins) {
+            if (amount >= coin) {
+                if (canChange(Arrays.copyOfRange(coins, 0, coins.length - 1), amount - coin)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+        // memoization solution
+        public boolean canChangeMemoized(int[] coins, int amount) {
+            if (amount == 0) return true;
+            if (coins.length == 0) return false;
+            Map <Integer, Boolean> map = new HashMap<>();
+            return canChangeMemoizedHelper(coins, amount, map);
+        }
+
+        private boolean canChangeMemoizedHelper(int[] coins, int amount, Map<Integer, Boolean> map) {
+            if (amount == 0) return true;
+            if (coins.length == 0) return false;
+            if (map.containsKey(amount)) return map.get(amount);
+            for (int coin : coins) {
+                if (amount >= coin) {
+                    if (canChange(Arrays.copyOfRange(coins, 0, coins.length - 1), amount - coin)) {
+                        map.put(amount, true);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     public static void main(String[] args) {
         CoinChange cc = new CoinChange();
-        int[] coins = {1 , 2, 5};
-        int amount = 7;
+        int[] coins = {  2, 5};
+        int amount = 703;
         System.out.println(cc.coinChange2(coins, amount));
+        System.out.println(cc.canChange(coins, amount));
+        System.out.println(cc.canChangeMemoized(coins, amount));
         // coins = new int[]{2};
         // amount = 3;
         // System.out.println(cc.coinChange2(coins, amount));

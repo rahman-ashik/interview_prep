@@ -145,11 +145,67 @@ public class LongestPalindrome {
         return j - i - 1;
     }
 
+    public String longestCommonSubsequence(String s1, String s2) {
+        int[][] dp = new int[s1.length() + 1][s2.length() + 1];
+
+        // dp table show
+        // debug start
+        System.out.print("  ");
+        for (int i = 0; i < dp[0].length-1; i++) System.out.print(" " + s2.charAt(i) );
+        System.out.println();
+        for (int i = 0; i < dp.length-1; i++) {
+            System.out.print(" " + s1.charAt(i) + " ");
+            for (int j = 0; j < dp[0].length-1; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+        // debug end
+
+        int start = 0, end = 0;
+        for (int i = 0; i < s1.length(); ++i)
+            for (int j = 0; j < s2.length(); ++j) {
+
+                if (s1.charAt(i) == s2.charAt(j)) 
+                    dp[i + 1][j + 1] = 1 + dp[i][j];
+                else 
+                    dp[i + 1][j + 1] =  Math.max(dp[i][j + 1], dp[i + 1][j]);
+
+                if (dp[i + 1][j + 1] > end - start + 1) {
+                    start = i;
+                    end = j;
+                }
+
+            }
+
+
+         // dp table show
+        // debug start
+        System.out.println(" After DP ");
+        System.out.print("  ");
+        for (int i = 0; i < dp[0].length-1; i++) System.out.print(" " + s2.charAt(i) );
+        System.out.println();
+        for (int i = 0; i < dp.length-1; i++) {
+            System.out.print(" " + s1.charAt(i) + " ");
+            for (int j = 0; j < dp[0].length-1; j++) {
+                System.out.print(dp[i][j] + " ");
+            }
+            System.out.println();
+        }
+        // debug end
+
+        
+
+        return s1.substring(start, end + 1);
+    }
+
 
 
     public static void main(String[] args) {
         LongestPalindrome l = new LongestPalindrome();
         System.out.println(l.longestPalindrome("babad"));
+        System.out.println(l.longestPalindrome2("babad"));
+        System.out.println(l.longestCommonSubsequence("babad", "dabab"));
         
     }
 }
